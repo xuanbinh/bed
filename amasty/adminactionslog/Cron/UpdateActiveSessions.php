@@ -31,8 +31,10 @@ class UpdateActiveSessions
         $inactiveSessions = $this->activeSessionManager->getInactiveSessions();
 
         foreach ($inactiveSessions as $sessionId) {
-            $this->activeSessionManager->terminate($sessionId);
-            $this->visitHistoryManager->endVisit($sessionId);
+            if($sessionId) {
+                $this->activeSessionManager->terminate($sessionId);
+                $this->visitHistoryManager->endVisit($sessionId);
+            }
         }
     }
 }
